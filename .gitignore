@@ -1,0 +1,11 @@
+*.*
+!*/
+!.gitignore
+!.gitkeep
+!*.py
+!*.R
+!*.ipynb
+!*.sh
+!*.csv
+!*.md
+sandbox/
