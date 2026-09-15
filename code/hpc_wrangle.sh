@@ -4,9 +4,10 @@
 #PBS -j oe
 #PBS -N wrangle
 
-module load anaconda3/personal
-
-# Activate msprime environment
+module load miniforge/3
+# Load conda
+eval "$(~/miniforge3/bin/conda shell.bash hook)" 
+# Activate conda environment
 source activate msprime_env
 
 # Set working directories

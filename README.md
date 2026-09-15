@@ -12,23 +12,17 @@ This directory contains the codes and data for producing the results in the arti
 
 ## Usage
 
-### Running the scripts
+### Running on HPC
 - **hpc_*.sh**
 
-All the shell scripts with the hpc_ prefix are for batch jobs on PBS HPC system. Transfer them along with all the Python and R scripts to the `$HOME` directory on HPC, then submit the jobs by `qsub` command. E.g. `qsub hpc_LD.sh`.
+All the shell scripts with the hpc_ prefix are for batch jobs on PBS HPC system. Transfer them along with all the Python and R scripts to the `$HOME` directory on HPC, then submit the jobs by `qsub` command. E.g. `qsub hpc_constant.sh`. First run `hpc_constant.sh` and `hpc_seasonal.sh`, then `hpc_wrangle.sh` after the previous two jobs are complete; run `hpc_subsample_tajimasD.sh` after the seasonal jobs for subsampling.
 
 ### Dependencies
 You need to first set up conda on the remote HPC system. This step may vary on different HPC systems, please refer to instructions from your own institution.
 
-In conda environment, install R by
-
+First load conda, then set up a virtual environment by
 ```
-conda install R
-```
-
-Then set up a virtual environment by
-```
-conda create -n msprime_env msprime tskit numpy pandas r-tidyverse r-reticulate 
+conda create -n msprime_env msprime tskit numpy pandas r-tidyverse 
 ```
 This will create an environment `msprime_env` with all necessary modules and packages installed.
 
@@ -36,4 +30,3 @@ This will create an environment `msprime_env` with all necessary modules and pac
 
 ## Author
 Laiyin Zhou
-l.zhou24@imperial.ac.uk

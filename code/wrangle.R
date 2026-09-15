@@ -1,7 +1,4 @@
 library(tidyverse)
-library(reticulate)  # for Python integration
-np <- import("numpy")
-
 
 # Define statistic name mappings
 stat_specs <- tribble(

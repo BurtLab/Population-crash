@@ -1,6 +1,6 @@
 #!/bin/bash
 #PBS -l walltime=12:00:00
-#PBS -l select=1:ncpus=2:mem=10gb
+#PBS -l select=1:ncpus=2:mem=30gb
 #PBS -J 1-200
 #PBS -j oe
 #PBS -N simulation
@@ -12,17 +12,18 @@ eval "$(~/miniforge3/bin/conda shell.bash hook)"
 source activate msprime_env
 
 # Define Ne values after crash
-crash_value=(0.01 0.1)
-sigma_value=(0 0.1 0.3 0.5)
+crash_value=(0.01 0.1 0.3 0.5)
+sigma_value=(0 0.1 0.5)
 
 # Copy scripts to $TMPDIR (HPC temporary directory)
 cp $HOME/{constant.py,decline.py,statistics.py} $TMPDIR
+cd $TMPDIR
 
 # Run the simulations for each Ne value
 for crash in "${crash_value[@]}"; do
     for sigma in "${sigma_value[@]}"; do
-        python constant_hetero.py $sigma
-        python decline_hetero.py $sigma $crash
+        python constant.py $sigma
+        python decline.py $sigma $crash
         python statistics.py
 
         mkdir -p "$HOME/project/hetero/Constant_$crash/hetero_$sigma"
